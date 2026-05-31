@@ -1,0 +1,177 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login | WristKart</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+:root {
+    --bg-dark: #333;
+    --btn-color: #667eea;
+    --btn-hover: #5a6fd6;
+    --input-border: #555;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+
+body{
+    height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#ffffff;
+}
+
+.login-container{
+    width:100%;
+    height:100vh;
+    display:flex;
+}
+
+.image-section{
+    flex:2;
+    background:url("{% static 'images/login.jpg' %}") no-repeat center;
+    background-size:cover;
+}
+
+.form-section{
+    flex:0.8;
+    background:#cacaca;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:40px;
+    color:white;
+}
+
+.login-content{
+    width:100%;
+    max-width:400px;
+}
+
+.login-content h2{
+    text-align:center;
+    margin-bottom:30px;
+}
+
+.input-group{
+    margin-bottom:20px;
+}
+
+.input-group input{
+    width:100%;
+    background:transparent;
+    border:1px solid var(--input-border);
+    border-radius:40px;
+    padding:15px;
+    color:white;
+    font-size:14px;
+}
+
+.input-group input:focus{
+    border-color:var(--btn-color);
+}
+
+.error-message{
+    background:#ff4d4d;
+    padding:10px;
+    margin-bottom:15px;
+    border-radius:6px;
+    font-size:13px;
+    text-align:center;
+}
+
+.login-btn{
+    width:100%;
+    padding:15px;
+    background:var(--btn-color);
+    border:none;
+    border-radius:40px;
+    color:white;
+    font-weight:600;
+    cursor:pointer;
+}
+
+.login-btn:hover{
+    background:var(--btn-hover);
+}
+.login-link a{
+    color:white;
+    text-decoration:underline;
+}
+@media(max-width:992px){
+    .image-section{display:none;}
+    .form-section{flex:1;}
+}
+</style>
+</head>
+
+<body>
+
+<div class="login-container">
+<div class="image-section"></div>
+
+<div class="form-section">
+<div class="login-content">
+
+<h2>Login to WristKart</h2>
+
+{% if error %}
+<div class="error-message">{{ error }}</div>
+{% endif %}
+
+<form method="POST" id="loginForm">
+{% csrf_token %}
+
+<div class="input-group">
+<input type="text" name="un" id="username" placeholder="Username">
+</div>
+
+<div class="input-group">
+<input type="password" name="psw" id="password" placeholder="Password">
+</div>
+
+<button type="submit" class="login-btn">Login</button>
+
+</form>
+<div class="login-link">
+New user? <a href="/pp/">sign up</a>
+</div>
+</div>
+</div>
+</div>
+
+<script>
+
+document.getElementById("loginForm").addEventListener("submit", function(e){
+
+    let username = document.getElementById("username").value.trim();
+    let password = document.getElementById("password").value.trim();
+
+    if(username === "" || password === ""){
+        e.preventDefault();
+        alert("Both Username and Password are required.");
+        return;
+    }
+
+    if(username.length < 3){
+        e.preventDefault();
+        alert("Username must be at least 3 characters.");
+        return;
+    }
+
+    if(password.length < 4){
+        e.preventDefault();
+        alert("Password must be at least 4 characters.");
+        return;
+    }
+
+});
+</script>
+
+</body>
+</html>

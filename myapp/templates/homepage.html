@@ -1,0 +1,395 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WristKart</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif;}
+body{background:#ffffff;color:#111;}
+.container{width:92%;max-width:2500px;margin:auto;}
+
+.topbar{background:#c2b9c3;color:#000;text-align:center;padding:10px;font-size:14px;}
+
+nav{background:white;padding:20px 10px;border-bottom:1px solid #eee;}
+nav .flex{display:flex;justify-content:space-between;align-items:center;flex-wrap:nowrap;}
+.logo{font-size:28px;font-weight:bold;}
+.nav-links a{margin-left:25px;text-decoration:none;color:#333;}
+.nav-links a:hover{color:#c9a227;display:flex;align-items:center;justify-content:center;margin-right:40px;}
+
+.hero{padding:90px 0;background:#c2b9c3;}
+.hero-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:70px;align-items:center;}
+.hero h1{font-size:48px;margin-bottom:25px;}
+.hero p{font-size:18px;color:#666;margin-bottom:25px;}
+.hero img{width:100%;border-radius:10px;}
+
+.btn{padding:12px 24px;background:#000;border:none;color:#fff;font-weight:bold;border-radius:6px;}
+
+.section{padding:80px 0;}
+.section-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:40px;}
+.section-header h2{font-size:30px;}
+.view-btn{background:#111;color:#fff;padding:8px 18px;border-radius:5px;text-decoration:none;font-size:14px;}
+
+.grid{display:flex;flex-wrap:wrap;gap:30px;}
+.card{flex:1 1 calc(25% - 30px);max-width:calc(25% - 30px);background:#fff;border:1px solid #eee;border-radius:10px;overflow:hidden;transition:0.3s;}
+.card:hover{box-shadow:0 10px 25px rgba(0,0,0,0.1);transform:translateY(-5px);}
+.card img{width:100%;height:280px;object-fit:cover;}
+.card-body{padding:18px;}
+.brand{font-size:13px;color:#888;}
+.price{margin-top:10px;font-weight:bold;color:#c9a227;}
+.empty{padding:60px 0;text-align:center;color:#999;}
+/* NAVBAR */
+.navbar{
+    background:#ffffff;
+    padding:25px 0;
+    border-bottom:1px solid #eee;
+}
+
+.nav-wrapper{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+/* LEFT */
+.logo{
+    font-size:27px;
+    font-weight:bold;
+    text-decoration:none;
+    color:#111;
+}
+
+/* CENTER SEARCH */
+.nav-center{
+    flex:1;
+    display:flex;
+    justify-content:center;
+}
+
+.search-form{
+    width:60%;
+    display:flex;
+}
+
+.search-form input{
+    flex:1;
+    padding:10px 15px;
+    border:1px solid #ddd;
+    border-radius:30px 0px 0 30px ;
+    outline:3px;
+    outline-color:blue;
+}
+
+.search-form button{
+    padding:10px 20px;
+    border:none;
+    background:blue;
+    color:white;
+    border-radius:0 30px 30px 0;
+    cursor:pointer;
+}
+
+.search-form button:hover{
+    background:#c2b9c3;
+}
+
+/* RIGHT */
+.nav-right{
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+.menu-links a{
+    margin-right:10px;
+    text-decoration:none;
+    color:#333;
+    font-size:14px;
+}
+
+.menu-links a:hover{
+    color:#c9a227;
+}
+
+/* CART */
+.cart-wrapper{
+    position:relative;
+}
+
+.cart-icon{
+    font-size:18px;
+    text-decoration:none;
+    position:relative;
+}
+
+.cart-badge{
+    position:absolute;
+    top:-8px;
+    right:-10px;
+    background:red;
+    color:white;
+    font-size:10px;
+    padding:3px 6px;
+    border-radius:50%;
+}
+
+/* BUTTONS */
+.nav-btn{
+    padding:6px 14px;
+    background:blue;
+    color:white;
+    text-decoration:none;
+    border-radius:6px;
+    font-size:13px;
+}
+
+.nav-btn:hover{
+    background:#9abbdd;
+}
+
+
+
+footer{background:grey;color:#fff;text-align:center;padding:40px 0;}
+
+@media(max-width:1200px){
+.card{flex:1 1 calc(33.33% - 30px);max-width:calc(33.33% - 30px);}
+}
+@media(max-width:900px){
+.hero-grid{grid-template-columns:1fr;text-align:center;}
+.card{flex:1 1 calc(50% - 30px);max-width:calc(50% - 30px);}
+}
+@media(max-width:600px){
+.card{flex:1 1 100%;max-width:100%;}
+}
+</style>
+</head>
+
+<body>
+
+<div class="topbar">Free Shipping on Orders Over $500 | 30-Day Returns</div>
+
+<nav class="navbar">
+<div class="container nav-wrapper">
+
+    <!-- LEFT -->
+    <div class="nav-left">
+        <a href="/" class="logo">WristKart</a>
+    </div>
+
+    <!-- CENTER (SEARCH) -->
+    <div class="nav-center">
+        <form action="/search/" method="GET" class="search-form">
+            <input type="text" name="q" placeholder="Search watches...">
+            <button type="submit">Search</button>
+        </form>
+    </div>
+
+    <!-- RIGHT -->
+    <div class="nav-right">
+
+        <div class="menu-links">
+            <a href="#popular">Popular</a>
+            <a href="#smart">Smart</a>
+            <a href="#luxury">Luxury</a>
+            <a href="#sport">Sport</a>
+            <a href="#casual">Casual</a>
+        </div>
+
+        {% if request.session.id %}
+
+        <div class="cart-wrapper">
+            <a href="/vc/" class="cart-icon">
+                🛒
+                {% if cart_count > 0 %}
+                <span class="cart-badge">{{ cart_count }}</span>
+                {% endif %}
+            </a>
+        </div>
+
+
+
+        <a href="/profile/" class="nav-btn">Profile</a>
+
+        <a href="/logout/"
+           onclick="return confirmLogout();"
+           class="nav-btn">
+           Logout
+        </a>
+
+        {% else %}
+            <a href="/bb/" class="nav-btn">Login</a>
+            <a href="/pp/" class="nav-btn">Sign Up</a>
+        {% endif %}
+
+    </div>
+
+</div>
+</nav>
+
+
+<section class="hero">
+<div class="container hero-grid">
+<div>
+<h1>Discover Your Perfect Timepiece</h1>
+<p>Premium collection crafted for every style.</p>
+<button class="btn">Shop Now</button>
+</div>
+<div>
+<img src="media/images/heroimg.webp">
+</div>
+</div>
+</section>
+
+<!-- POPULAR -->
+<section class="section" id="popular">
+<div class="container">
+<div class="section-header">
+<h2>Popular Watches</h2>
+
+</div>
+
+{% if popular %}
+<div class="grid">
+{% for w in popular %}
+<a href="/product/{{ w.id }}/" class="card">
+<img src="{{ w.tfile.url }}">
+<div class="card-body">
+<div class="brand">{{ w.brand }}</div>
+<h4>{{ w.tpname }}</h4>
+<div class="price">$ {{ w.tprice }}</div>
+</div>
+</a>
+{% endfor %}
+</div>
+{% else %}
+<div class="empty">No Products Available</div>
+{% endif %}
+
+</div>
+</section>
+
+<!-- SMART -->
+<section class="section" id="smart">
+<div class="container">
+<div class="section-header">
+<h2>Smart Watches</h2>
+<a href="/category/smart/" class="view-btn">View All</a>
+</div>
+
+{% if smart %}
+<div class="grid">
+{% for w in smart %}
+<a href="/product/{{ w.id }}/" class="card">
+<img src="{{ w.tfile.url }}">
+<div class="card-body">
+<div class="brand">{{ w.brand }}</div>
+<h4>{{ w.tpname }}</h4>
+<div class="price">$ {{ w.tprice }}</div>
+</div>
+</a>
+{% endfor %}
+</div>
+{% else %}
+<div class="empty">No Products Available</div>
+{% endif %}
+
+</div>
+</section>
+
+<!-- LUXURY -->
+<section class="section" id="luxury">
+<div class="container">
+<div class="section-header">
+<h2>Luxury Watches</h2>
+<a href="/category/luxury/" class="view-btn">View All</a>
+</div>
+
+{% if luxury %}
+<div class="grid">
+{% for w in luxury %}
+<a href="/product/{{ w.id }}/" class="card">
+<img src="{{ w.tfile.url }}">
+<div class="card-body">
+<div class="brand">{{ w.brand }}</div>
+<h4>{{ w.tpname }}</h4>
+<div class="price">$ {{ w.tprice }}</div>
+</div>
+</a>
+{% endfor %}
+</div>
+{% else %}
+<div class="empty">No Products Available</div>
+{% endif %}
+
+</div>
+</section>
+
+<!-- SPORT -->
+<section class="section" id="sport">
+<div class="container">
+<div class="section-header">
+<h2>Sport Watches</h2>
+<a href="/category/sport/" class="view-btn">View All</a>
+</div>
+
+{% if sport %}
+<div class="grid">
+{% for w in sport %}
+<a href="/product/{{ w.id }}/" class="card">
+<img src="{{ w.tfile.url }}">
+<div class="card-body">
+<div class="brand">{{ w.brand }}</div>
+<h4>{{ w.tpname }}</h4>
+<div class="price">$ {{ w.tprice }}</div>
+</div>
+</a>
+{% endfor %}
+</div>
+{% else %}
+<div class="empty">No Products Available</div>
+{% endif %}
+
+</div>
+</section>
+
+<!-- CASUAL -->
+<section class="section" id="casual">
+<div class="container">
+<div class="section-header">
+<h2>Casual Watches</h2>
+<a href="/category/casual/" class="view-btn">View All</a>
+</div>
+
+{% if casual %}
+<div class="grid">
+{% for w in casual %}
+<a href="/product/{{ w.id }}/"  class="card">
+<img src="{{ w.tfile.url }}">
+<div class="card-body">
+<div class="brand">{{ w.brand }}</div>
+<h4>{{ w.tpname }}</h4>
+<div class="price">$ {{ w.tprice }}</div>
+</div>
+</a>
+{% endfor %}
+</div>
+{% else %}
+<div class="empty">No Products Available</div>
+{% endif %}
+
+</div>
+</section>
+
+<footer>
+© 2026 WristKart. All Rights Reserved.
+</footer>
+<script>
+function confirmLogout(){
+    return confirm("Are you sure you want to logout?");
+}
+</script>
+
+</body>
+</html>

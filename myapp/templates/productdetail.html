@@ -1,0 +1,174 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{ prod.tpname }} | WristKart</title>
+
+<style>
+body{
+    margin:0;
+    font-family:Arial, sans-serif;
+    background:#f6f6f6;
+}
+
+.container{
+    width:92%;
+    max-width:1400px;
+    margin:60px auto;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:1.3fr 1fr;
+    gap:40px;
+}
+
+.product-img{
+    width:100%;
+    border-radius:8px;
+    background:#fff;
+    padding:30px;
+}
+
+.right-box{
+    background:#fff;
+    padding:30px;
+    border-radius:8px;
+    box-shadow:0 5px 20px rgba(0,0,0,0.05);
+}
+
+.brand{
+    font-size:13px;
+    color:#666;
+    text-transform:uppercase;
+    margin-bottom:8px;
+}
+.back-link {
+    display: inline;
+    width: 100%;
+    padding: 14px;
+    background-color: yellow;
+    color: black;
+    text-decoration: none;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+.back-link:hover {
+    background-color: #c9a227;
+    color: black;
+}
+.back-link:active {
+    transform: scale(0.98);
+}
+h1{
+    font-size:26px;
+    margin-bottom:15px;
+}
+
+.price{
+    font-size:28px;
+    color:#b12704;
+    margin-bottom:20px;
+}
+
+.meta{
+    margin-bottom:20px;
+    color:#333;
+    font-size:14px;
+    line-height:1.7;
+}
+
+.stock{
+    margin-bottom:20px;
+    font-weight:600;
+}
+
+.btn{
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:4px;
+    font-weight:bold;
+    cursor:pointer;
+    margin-bottom:10px;
+}
+
+.btn-cart{
+    background:#ffd814;
+}
+
+.btn-cart:hover{
+    background:#f7ca00;
+}
+
+.btn-buy{
+    background:#ffa41c;
+}
+
+.btn-buy:hover{
+    background:#fa8900;
+}
+
+@media(max-width:900px){
+    .grid{grid-template-columns:1fr;}
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <a href="/" onclick="history.back(); return false;" class="back-link">
+    BACK
+</a>
+    <br><br>
+<div class="grid">
+
+<div>
+<img src="{{ prod.tfile.url }}" class="product-img">
+</div>
+
+<div class="right-box">
+
+<div class="brand">{{ prod.brand }}</div>
+<h1>{{ prod.tpname }}</h1>
+
+<div class="price">$ {{ prod.tprice }}</div>
+
+<div class="meta">
+Category: {{ prod.category }}<br>
+Gender: {{ prod.gender }}<br>
+Strap: {{ prod.strap_material }}
+</div>
+
+<div class="stock">
+{% if prod.tstock > 0 %}
+In Stock
+{% else %}
+Out of Stock
+{% endif %}
+</div>
+
+{% if request.session.id and prod.tstock > 0 %}
+<a href="/atoc/{{ prod.id }}/">
+<button class="btn btn-cart">Add to Cart</button>
+</a>
+{% elif not request.session.id %}
+<a href="/bb/">
+<button class="btn btn-cart">Login to Purchase</button>
+</a>
+{% endif %}
+
+</div>
+
+</div>
+</div>
+
+</body>
+</html>

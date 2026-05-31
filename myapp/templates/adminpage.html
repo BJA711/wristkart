@@ -1,0 +1,114 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Admin Dashboard | WristKart</title>
+
+<style>
+body{
+    margin:0;
+    font-family:Arial;
+    display:flex;
+    background:#f4f6f9;
+}
+
+/* SIDEBAR */
+.sidebar{
+    width:240px;
+    background:#111;
+    color:white;
+    height:100vh;
+    padding:30px 20px;
+}
+
+.sidebar h2{
+    margin-bottom:30px;
+}
+
+.sidebar a{
+    display:block;
+    color:white;
+    text-decoration:none;
+    margin-bottom:15px;
+    padding:8px 10px;
+    border-radius:6px;
+}
+
+.sidebar a:hover{
+    background:#c9a227;
+}
+
+/* MAIN */
+.main{
+    flex:1;
+    padding:40px;
+}
+
+.card-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    gap:20px;
+}
+
+.card{
+    background:white;
+    padding:30px;
+    border-radius:10px;
+    box-shadow:0 5px 20px rgba(0,0,0,0.05);
+}
+
+.card h3{
+    margin-bottom:10px;
+    color:#666;
+}
+.card h2{
+    margin:0;
+}
+</style>
+</head>
+
+<body>
+
+<div class="sidebar">
+<h2>Admin Panel</h2>
+
+<a href="/sap/">Dashboard</a>
+<a href="/adp/">Add Product</a>
+<a href="/ap/">Manage Products</a>
+<a href="/inv/">New Orders</a>
+<a href="/adms/">Sales History</a>
+<a href="/logout/">Logout</a>
+</div>
+
+<div class="main">
+
+<h2>Dashboard Overview</h2>
+
+<div class="card-grid">
+
+<div class="card">
+<h3>Total Products</h3>
+<h2>{{ total_products }}</h2>
+</div>
+
+<div class="card">
+<h3>Total Orders</h3>
+<h2>{{ total_orders }}</h2>
+</div>
+
+<div class="card">
+<h3>Total Users</h3>
+<h2>{{ total_users }}</h2>
+</div>
+
+<div class="card">
+<h3>Total Revenue</h3>
+<h2>$ {{ total_revenue }}</h2>
+</div>
+
+</div>
+
+</div>
+
+</body>
+</html>

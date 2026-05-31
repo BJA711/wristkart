@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>My Dashboard | WristKart</title>
+
+<style>
+body{
+    margin:0;
+    font-family:Arial;
+    display:flex;
+    background:#f5f5f5;
+}
+
+.sidebar{
+    width:250px;
+    background:#111;
+    color:white;
+    height:100vh;
+    padding:30px 20px;
+}
+
+.sidebar h1{
+    margin-bottom:30px;
+}
+
+.sidebar a{
+    display:block;
+    color:white;
+    text-decoration:none;
+    margin-bottom:15px;
+    padding:8px 10px;
+    border-radius:6px;
+}
+
+.sidebar a:hover{
+    background:#9abddc;
+}
+
+.active{
+    background:blue;
+}
+.backbtn{
+    padding:6px 12px;
+    background:yellow;
+    color:black;
+    text-decoration:none;
+    border-radius:50px;
+    font-size:16px;
+}
+.home a
+{
+  all: unset;
+  cursor: pointer;
+}
+.main{
+    flex:1;
+    padding:40px;
+}
+
+.card{
+    background:white;
+    padding:30px;
+    border-radius:10px;
+    margin-bottom:30px;
+}
+
+.order-row{
+    display:flex;
+    justify-content:space-between;
+    padding:12px 0;
+    border-bottom:1px solid #eee;
+}
+
+.btn{
+    padding:6px 12px;
+    background:blue;
+    color:white;
+    text-decoration:none;
+    border-radius:6px;
+}
+</style>
+</head>
+<body>
+
+<div class="sidebar">
+<div class="home">
+<a href="/"><button class="backbtn">Home</button></a>
+</div><br><br>
+<h1>My Account</h1>
+<a href="#" class="active">Profile</a>
+<a href="/myp/">My Orders</a>
+<a href="/passs/">Change Password</a>
+<a href="/logout/">Logout</a>
+</div>
+
+<div class="main">
+
+<div class="card">
+<h3>Profile Information</h3>
+<p>Name: {{ user.fn }}</p>
+<p>Email: {{ user.email }}</p>
+<p>Phone: {{ user.phoneno }}</p>
+</div>
+
+<div class="card">
+<h3>My Orders</h3>
+
+{% for order in orders %}
+<div class="order-row">
+<div>
+Order #{{ order.salesno }} <br><br>
+Status: {{ order.status }}
+</div>
+<div>
+$ {{ order.total }} <br><br>
+<a href="/invoice/{{ order.salesno }}/" class="btn">Invoice</a>
+</div>
+</div>
+{% empty %}
+<p>No orders yet.</p>
+{% endfor %}
+
+</div>
+
+</div>
+
+</body>
+</html>

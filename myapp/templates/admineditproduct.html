@@ -1,0 +1,182 @@
+﻿<!DOCTYPE html>
+{% load static %}
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Responsive Bootstrap Advance Admin Template</title>
+
+    <!-- BOOTSTRAP STYLES-->
+    <link href="{% static 'af/assets/css/bootstrap.css' %}" rel="stylesheet" />
+    <!-- FONTAWESOME STYLES-->
+    <link href="{% static 'af/assets/css/font-awesome.css' %}" rel="stylesheet" />
+    <!--CUSTOM BASIC STYLES-->
+    <link href="{% static 'af/assets/css/basic.css' %}" rel="stylesheet" />
+    <!--CUSTOM MAIN STYLES-->
+    <link href="{% static 'af/assets/css/custom.css' %}" rel="stylesheet" />
+    <!-- GOOGLE FONTS-->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+</head>
+<body>
+    <div id="wrapper">
+        <nav class="navbar navbar-default navbar-cls-top " role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html">ADMIN</a>
+            </div>
+
+            <div class="header-right">
+
+              <a href="message-task.html" class="btn btn-info" title="New Message"><b>30 </b><i class="fa fa-envelope-o fa-2x"></i></a>
+                <a href="message-task.html" class="btn btn-primary" title="New Task"><b>40 </b><i class="fa fa-bars fa-2x"></i></a>
+                <a href="login.html" class="btn btn-danger" title="Logout"><i class="fa fa-exclamation-circle fa-2x"></i></a>
+
+
+            </div>
+        </nav>
+        <!-- /. NAV TOP  -->
+        <nav class="navbar-default navbar-side" role="navigation">
+            <div class="sidebar-collapse">
+                <ul class="nav" id="main-menu">
+                    <li>
+                        <div class="user-img-div">
+
+                            <div class="inner-text">
+                                 Welcome Admin
+                           </div>
+                        </div>
+
+                    </li>
+
+
+                    <li>
+                        <a class="active-menu" href="index.html"><i class="fa fa-dashboard "></i>Dashboard</a>
+                    </li>
+                    <li>
+                        <a href="/adp/"><i class="fa fa-bicycle "></i>Add Products <span class="fa arrow"></span></a>
+                    </li>
+                    <li>
+                        <a href="/ap/"><i class="fa fa-flash "></i>List Products</a>
+
+                    </li>
+                    <li>
+                        <a href="/inv/"><i class="fa fa-flash "></i>Invoice</a>
+
+                    </li>
+                       <li>
+                        <a href="/adms/"><i class="fa fa-yelp "></i>Sales History <span class="fa arrow"></span></a>
+                    </li>
+                    <li>
+                        <a href="/passs/"><i class="fa fa-sign-in "></i>Change Password</a>
+                    </li>
+                    <li>
+                        <a href="/h/"><i class="fa fa-sign-in "></i>Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <!-- /. NAV SIDE  -->
+        <div id="page-wrapper">
+            <div id="page-inner">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1 class="page-head-line">ADD PRODUCTS</h1>
+
+                    </div>
+                </div>
+                <!-- /. ROW  -->
+
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <div class="panel panel-info">
+                        <div class="panel-body">
+                            <form role="form" method="post" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <div class="form-group">
+                                    <label>Product Code</label>
+                                    <input class="form-control" name="pcode" type="text" value="{{ mrec.tpcode }}" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Product Name</label>
+                                    <input class="form-control" type="text" name="pname" value="{{ mrec.tpname }}" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Brand</label>
+                                    <input class="form-control" type="text" name="brand" value="{{ mrec.brand }}" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Category</label>
+                                    <select class="form-control" name="category">
+                                        <option value="smart" {% if mrec.category == "smart" %}selected{% endif %}>Smart Watch</option>
+                                        <option value="luxury" {% if mrec.category == "luxury" %}selected{% endif %}>Luxury Watch</option>
+                                        <option value="sport" {% if mrec.category == "sport" %}selected{% endif %}>Sport Watch</option>
+                                        <option value="casual" {% if mrec.category == "casual" %}selected{% endif %}>Casual Watch</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Gender</label>
+                                    <select class="form-control" name="gender">
+                                        <option value="men" {% if mrec.gender == "men" %}selected{% endif %}>Men</option>
+                                        <option value="women" {% if mrec.gender == "women" %}selected{% endif %}>Women</option>
+                                        <option value="unisex" {% if mrec.gender == "unisex" %}selected{% endif %}>Unisex</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Strap Material</label>
+                                    <select class="form-control" name="strap">
+                                        <option value="leather" {% if mrec.strap_material == "leather" %}selected{% endif %}>Leather</option>
+                                        <option value="metal" {% if mrec.strap_material == "metal" %}selected{% endif %}>Metal</option>
+                                        <option value="silicone" {% if mrec.strap_material == "silicone" %}selected{% endif %}>Silicone</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Price</label>
+                                    <input class="form-control" type="text" name="price" value="{{ mrec.tprice }}" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Stock Qty</label>
+                                    <input class="form-control" type="text" name="stock" value="{{ mrec.tstock }}" required>
+                                </div>
+
+                                        <button type="submit" class="btn btn-info">SUBMIT</button>
+                                    </form>
+                            </div>
+                        </div>
+            </div>
+
+        </div>
+             <!--/.ROW-->
+      </div>
+            <!-- /. PAGE INNER  -->
+    </div>
+        <!-- /. PAGE WRAPPER  -->
+    </div>
+    <!-- /. WRAPPER  -->
+    <div id="footer-sec">
+        &copy; 2014 YourCompany | Design By : <a href="http://www.binarytheme.com/" target="_blank">BinaryTheme.com</a>
+    </div>
+    <!-- /. FOOTER  -->
+    <!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
+    <!-- JQUERY SCRIPTS -->
+    <script src="{% static 'af/assets/js/jquery-1.10.2.js' %}"></script>
+    <!-- BOOTSTRAP SCRIPTS -->
+    <script src="{% static 'af/assets/js/bootstrap.js' %}"></script>
+    <!-- METISMENU SCRIPTS -->
+    <script src="{% static 'af/assets/js/jquery.metisMenu.js' %}"></script>
+    <!-- CUSTOM SCRIPTS -->
+    <script src="{% static 'af/assets/js/custom.js' %}"></script>
+
+
+</body>
+</html>

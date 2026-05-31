@@ -1,0 +1,207 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Secure Checkout | WristKart</title>
+
+<style>
+body{
+    margin:0;
+    font-family:Arial, sans-serif;
+    background:#f5f5f5;
+}
+
+.container{
+    width:92%;
+    max-width:1200px;
+    margin:50px auto;
+}
+
+h1{
+    margin-bottom:40px;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:2fr 1fr;
+    gap:40px;
+}
+
+.box{
+    background:#fff;
+    padding:30px;
+    border-radius:12px;
+    box-shadow:0 5px 20px rgba(0,0,0,0.05);
+}
+
+.input-group{
+    margin-bottom:18px;
+}
+
+label{
+    font-size:14px;
+    display:block;
+    margin-bottom:6px;
+}
+
+input, textarea, select{
+    width:100%;
+    padding:12px;
+    border:1px solid #ddd;
+    border-radius:6px;
+}
+
+.summary-row{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:12px;
+}
+
+.total{
+    font-weight:bold;
+    font-size:18px;
+}
+
+.back-link {
+    display: block;
+    width: 100%;
+    padding: 14px;
+    background-color: black ;
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    font-size: 13px;
+    font-weight: 500;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    box-sizing: border-box
+}
+.back-link:hover {
+    background-color: #c9a227;
+    color: black;
+}
+.back-link:active {
+    transform: scale(0.98);
+}
+.btn{
+    width:100%;
+    padding:14px;
+    background:#111;
+    color:white;
+    border:none;
+    border-radius:6px;
+    cursor:pointer;
+    margin-top:20px;
+}
+
+.btn:hover{
+    background:#c9a227;
+}
+
+@media(max-width:900px){
+    .grid{
+        grid-template-columns:1fr;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+<h1>Checkout</h1>
+
+<form method="POST" action="/upay/">
+{% csrf_token %}
+
+<div class="grid">
+
+<!-- LEFT SIDE -->
+<div class="box">
+
+<h2>Shipping Information</h2>
+
+<div class="input-group">
+<label>Full Name</label>
+<input type="text" name="fullname" required>
+</div>
+
+<div class="input-group">
+<label>Phone Number</label>
+<input type="text" name="phone" required>
+</div>
+
+<div class="input-group">
+<label>Address</label>
+<textarea name="address" required></textarea>
+</div>
+
+<div class="input-group">
+<label>City</label>
+<input type="text" name="city" required>
+</div>
+
+<div class="input-group">
+<label>State</label>
+<input type="text" name="state" required>
+</div>
+
+<div class="input-group">
+<label>PIN Code</label>
+<input type="text" name="pincode" required>
+</div>
+
+<h2 style="margin-top:30px;">Payment Information</h2>
+
+<div class="input-group">
+<label>Payment Method</label>
+<select name="payment_method" required>
+    <option value="Card">Credit/Debit Card</option>
+    <option value="UPI">UPI</option>
+    <option value="COD">Cash On Delivery</option>
+</select>
+</div>
+
+<div class="input-group">
+<label>Card Number</label>
+<input type="text" name="account_number">
+</div>
+
+</div>
+
+<!-- RIGHT SIDE -->
+<div class="box">
+
+<h2>Order Summary</h2>
+
+{% for item in cart_items %}
+<div class="summary-row">
+<span>{{ item.pname }} (x{{ item.qty }})</span>
+<span>$ {{ item.total }}</span>
+</div>
+{% endfor %}
+
+<hr>
+
+<div class="summary-row total">
+<span>Total</span>
+<span>$ {{ total }}</span>
+</div>
+
+<button type="submit" class="btn">Place Order</button><br><br>
+     <a href="/" onclick="history.back(); return false;" class="back-link">
+        Go To Previous Page
+    </a>
+
+</div>
+
+</div>
+
+</form>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,88 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Sales History | WristKart</title>
+
+<style>
+body{
+    margin:0;
+    font-family:Arial;
+    display:flex;
+    background:#f4f6f9;
+}
+.sidebar{
+    width:240px;
+    background:#111;
+    color:white;
+    height:100vh;
+    padding:30px 20px;
+}
+.sidebar h2{margin-bottom:30px;}
+.sidebar a{
+    display:block;
+    color:white;
+    text-decoration:none;
+    margin-bottom:15px;
+    padding:8px 10px;
+    border-radius:6px;
+}
+.sidebar a:hover{background:#c9a227;}
+
+.main{
+    flex:1;
+    padding:40px;
+}
+
+table{
+    width:100%;
+    background:white;
+    border-collapse:collapse;
+}
+
+th, td{
+    padding:10px;
+    border:1px solid #ddd;
+}
+</style>
+</head>
+
+<body>
+
+<div class="sidebar">
+<h2>Admin Panel</h2>
+<a href="/sap/">Dashboard</a>
+<a href="/adp/">Add Product</a>
+<a href="/ap/">Manage Products</a>
+<a href="/inv/">New Orders</a>
+<a href="/adms/">Sales History</a>
+<a href="/logout/">Logout</a>
+</div>
+
+<div class="main">
+
+<h2>Sales History</h2>
+
+<table>
+<tr>
+<th>Order #</th>
+<th>User</th>
+<th>Total</th>
+<th>Status</th>
+</tr>
+
+{% for o in mrec %}
+<tr>
+<td>{{ o.salesno }}</td>
+<td>{{ o.uname }}</td>
+<td>$ {{ o.total }}</td>
+<td>{{ o.status }}</td>
+</tr>
+{% endfor %}
+
+</table>
+
+</div>
+
+</body>
+</html>
