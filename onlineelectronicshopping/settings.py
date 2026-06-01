@@ -29,12 +29,11 @@ DEBUG = False
 
 ALLOWED_HOSTS = [
     "web-production-128c.up.railway.app",
-    "127.0.0.1",
-    "localhost",
 ]
 
 CSRF_TRUSTED_ORIGINS = [
     "https://web-production-128c.up.railway.app",
+
 ]
 
 
