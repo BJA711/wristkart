@@ -37,4 +37,6 @@ urlpatterns=[
 
     path('adms/',views.adminsaleshistory),
 
+    path("test-media/", views.test_media),
+
 ]

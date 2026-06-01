@@ -501,4 +501,17 @@ def search_products(request):
         "query": query
     })
 
+import os
+from django.http import HttpResponse
+from django.conf import settings
 
+def test_media(request):
+    path = os.path.join(
+        settings.MEDIA_ROOT,
+        "images",
+        "WhatsApp_Image_2026-03-01_at_8.08.36_PM.jpeg"
+    )
+
+    return HttpResponse(
+        f"Exists: {os.path.exists(path)}<br>Path: {path}"
+    )
