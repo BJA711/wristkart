@@ -25,7 +25,7 @@ urlpatterns = [
 ]
 
 urlpatterns += static(
-    settings.MEDIA_URL,cat /etc/resolv.conf
+    settings.MEDIA_URL,
     document_root=settings.MEDIA_ROOT
 )
 
